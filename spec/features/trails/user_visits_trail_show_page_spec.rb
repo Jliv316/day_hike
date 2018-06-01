@@ -12,7 +12,7 @@ describe 'visitor' do
       TripTrail.create(trip_id: trip3.id, trail_id: trail1.id)
 
       visit trail_path(trail1)
-      save_and_open_page
+      
       expect(page).to have_content("total number of hiking trips: #{trail1.total_trips}")
     end
   end

@@ -5,16 +5,10 @@ class Trip < ApplicationRecord
   
   def total_distance
     trails.sum(:length)
-    # trails.each do |trail|
-    #   length = trail.length
-    # Trail.where(trip_id: id).
   end
 
   def average_distance
     trails.average(:length)
-    # trails.each do |trail|
-    #   length = trail.length
-    # Trail.where(trip_id: id).
   end
 
   def max_distance
