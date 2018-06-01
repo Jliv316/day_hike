@@ -10,15 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222212820) do
+ActiveRecord::Schema.define(version: 20180601161839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "tables", force: :cascade do |t|
+    t.string "TripTrails"
+    t.bigint "trip_id"
+    t.bigint "trail_id"
+    t.index ["trail_id"], name: "index_tables_on_trail_id"
+    t.index ["trip_id"], name: "index_tables_on_trip_id"
+  end
 
   create_table "trails", force: :cascade do |t|
     t.integer "length"
     t.string "name"
     t.string "address"
+  end
+
+  create_table "trip_trails", force: :cascade do |t|
+    t.bigint "trip_id"
+    t.bigint "trail_id"
+    t.index ["trail_id"], name: "index_trip_trails_on_trail_id"
+    t.index ["trip_id"], name: "index_trip_trails_on_trip_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -27,4 +42,8 @@ ActiveRecord::Schema.define(version: 20180222212820) do
     t.datetime "end_date"
   end
 
+  add_foreign_key "tables", "trails"
+  add_foreign_key "tables", "trips"
+  add_foreign_key "trip_trails", "trails"
+  add_foreign_key "trip_trails", "trips"
 end
